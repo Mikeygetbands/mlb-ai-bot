@@ -1,0 +1,9 @@
+streamlit
+
+requests
+
+pandas
+
+pybaseball
+
+python-dotenv
