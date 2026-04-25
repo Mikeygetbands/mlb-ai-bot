@@ -28,45 +28,69 @@ TOP_30 = [
 
 TEAM_HITTERS = {
 
-    "NYY": ["Aaron Judge", "Giancarlo Stanton", "Anthony Volpe"],
+    "NYY": ["Aaron Judge","Giancarlo Stanton","Anthony Volpe","Gleyber Torres"],
 
-    "BOS": ["Rafael Devers", "Triston Casas", "Trevor Story"],
+    "BOS": ["Rafael Devers","Triston Casas","Trevor Story","Jarren Duran"],
 
-    "LAD": ["Shohei Ohtani", "Mookie Betts", "Freddie Freeman", "Max Muncy"],
+    "LAD": ["Shohei Ohtani","Mookie Betts","Freddie Freeman","Max Muncy","Will Smith"],
 
-    "CHC": ["Seiya Suzuki", "Ian Happ", "Dansby Swanson"],
+    "CHC": ["Seiya Suzuki","Cody Bellinger","Ian Happ","Dansby Swanson"],
 
-    "ATL": ["Ronald Acuna Jr.", "Matt Olson", "Austin Riley", "Marcell Ozuna"],
+    "ATL": ["Ronald Acuna Jr.","Matt Olson","Austin Riley","Marcell Ozuna","Ozzie Albies"],
 
-    "PHI": ["Kyle Schwarber", "Bryce Harper", "Trea Turner", "Nick Castellanos"],
+    "PHI": ["Kyle Schwarber","Bryce Harper","Trea Turner","Nick Castellanos"],
 
-    "NYM": ["Pete Alonso", "Francisco Lindor", "Brandon Nimmo"],
+    "NYM": ["Pete Alonso","Francisco Lindor","Brandon Nimmo"],
 
-    "HOU": ["Yordan Alvarez", "Jose Altuve"],
+    "HOU": ["Yordan Alvarez","Jose Altuve","Kyle Tucker","Alex Bregman"],
 
-    "TEX": ["Corey Seager", "Adolis Garcia", "Marcus Semien"],
+    "TEX": ["Corey Seager","Adolis Garcia","Marcus Semien","Josh Jung"],
 
-    "TOR": ["Vladimir Guerrero Jr.", "Bo Bichette"],
+    "TOR": ["Vladimir Guerrero Jr.","Bo Bichette","George Springer"],
 
-    "BAL": ["Gunnar Henderson", "Adley Rutschman"],
+    "BAL": ["Gunnar Henderson","Adley Rutschman","Anthony Santander"],
 
-    "SEA": ["Julio Rodriguez", "Cal Raleigh"],
+    "SEA": ["Julio Rodriguez","Cal Raleigh","Mitch Haniger"],
 
-    "SD": ["Fernando Tatis Jr.", "Manny Machado"],
+    "SD": ["Fernando Tatis Jr.","Manny Machado","Xander Bogaerts"],
 
-    "KC": ["Bobby Witt Jr.", "Salvador Perez"],
+    "ARI": ["Corbin Carroll","Christian Walker","Ketel Marte"],
 
-    "CIN": ["Elly De La Cruz", "Spencer Steer"],
+    "CIN": ["Elly De La Cruz","Spencer Steer","Tyler Stephenson"],
 
-    "CLE": ["Jose Ramirez", "Josh Naylor"],
+    "CLE": ["Jose Ramirez","Josh Naylor","Steven Kwan"],
 
-    "LAA": ["Mike Trout", "Logan O'Hoppe"],
+    "KC": ["Bobby Witt Jr.","Salvador Perez","Vinnie Pasquantino"],
 
-    "OAK": ["Brent Rooker", "Shea Langeliers"],
+    "DET": ["Spencer Torkelson","Riley Greene","Kerry Carpenter"],
 
-    "CWS": ["Luis Robert Jr.", "Eloy Jimenez"]
+    "MIN": ["Byron Buxton","Carlos Correa","Royce Lewis"],
+
+    "TB": ["Yandy Diaz","Brandon Lowe","Isaac Paredes"],
+
+    "MIL": ["Christian Yelich","Rhys Hoskins","William Contreras"],
+
+    "STL": ["Nolan Arenado","Paul Goldschmidt","Willson Contreras"],
+
+    "PIT": ["Oneil Cruz","Bryan Reynolds","Ke'Bryan Hayes"],
+
+    "MIA": ["Jazz Chisholm Jr.","Josh Bell","Jake Burger"],
+
+    "COL": ["Kris Bryant","Ryan McMahon","Elias Diaz"],
+
+    "SF": ["Matt Chapman","Jorge Soler","Michael Conforto"],
+
+    "LAA": ["Mike Trout","Taylor Ward","Logan O'Hoppe"],
+
+    "WSH": ["CJ Abrams","Lane Thomas","Keibert Ruiz"],
+
+    "OAK": ["Brent Rooker","Shea Langeliers","Zack Gelof"],
+
+    "CWS": ["Luis Robert Jr.","Eloy Jimenez","Andrew Vaughn"]
 
 }
+
+    "
 
 PITCHER_DATA = {
 
