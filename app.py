@@ -164,4 +164,11 @@ if player_name:
 
             st.write(f"Edge: {round(edge*100,2)}%")
 
-            st.write(f"Signal: {signal}")
+            st.write(f"Signal: {signal}") if not stats:
+
+    st.error("Statcast/player stats not found.")
+
+elif not odds:
+
+    st.error("HR odds not found. This usually means no HR prop is posted yet for this player.")
+t
