@@ -1,172 +1,38 @@
 import os
 
-import requests
-
 import streamlit as st
 
-from datetime import date
+import random
 
-from pybaseball import playerid_lookup, statcast_batter
+st.title("🔥 MLB HR AI Simulator")
 
-ODDS_API_KEY = os.getenv("ODDS_API_KEY")
+player_name = st.text_input("Enter Player Name")
 
-st.set_page_config(page_title="MLB HR AI Bot", layout="centered")
+if player_name:
 
-st.title("🔥 MLB HR Real-Time AI Simulator")
+    hr_prob = random.uniform(0.15, 0.35)
 
-player_name = st.text_input("Type player name", placeholder="Aaron Judge")
+    if hr_prob > 0.5:
 
-def american_to_prob(odds):
+        fair_odds = -100 * (hr_prob / (1 - hr_prob))
 
-    odds = int(odds)
+    else:
 
-    if odds > 0:
+        fair_odds = 100 * ((1 - hr_prob) / hr_prob)
 
-        return 100 / (odds + 100)
+    sportsbook_odds = random.randint(200, 400)
 
-    return abs(odds) / (abs(odds) + 100)
+    edge = sportsbook_odds - fair_odds
 
-def prob_to_american(prob):
-
-    if prob <= 0:
-
-        return None
-
-    if prob >= 0.5:
-
-        return round(-100 * prob / (1 - prob))
-
-    return round(100 * (1 - prob) / prob)
-
-def get_mlb_player_id(name):
-
-    parts = name.strip().split()
-
-    if len(parts) < 2:
-
-        return None
-
-    last = parts[-1]
-
-    first = " ".join(parts[:-1])
-
-    df = playerid_lookup(last, first)
-
-    if df.empty:
-
-        return None
-
-    return int(df.iloc[-1]["key_mlbam"])
-
-def get_recent_batter_stats(player_id):
-
-    today = date.today().strftime("%Y-%m-%d")
-
-    data = statcast_batter("2026-04-01", today, player_id)
-
-    if data.empty:
-
-        return None
-
-    batted = data[data["launch_speed"].notna()]
-
-    pa = max(len(data), 1)
-
-    hr = len(data[data["events"] == "home_run"])
-
-    hard_hit = len(batted[batted["launch_speed"] >= 95]) / max(len(batted), 1)
-
-    fly_ball = len(batted[batted["launch_angle"] >= 20]) / max(len(batted), 1)
-
-    return {
-
-        "hr_pa": hr / pa,
-
-        "hard_hit": hard_hit,
-
-        "fly_ball": fly_ball,
-
-        "pa_sample": pa
-
-    }
-
-def get_hr_odds(player_name):
-
-    url = "https://api.the-odds-api.com/v4/sports/baseball_mlb/odds"
-
-    params = {
-
-        "apiKey": ODDS_API_KEY,
-
-        "regions": "us",
-
-        "markets": "batter_home_runs",
-
-        "oddsFormat": "american"
-
-    }
-
-    r = requests.get(url, params=params)
-
-    if r.status_code != 200:
-
-        return None
-
-    games = r.json()
-
-    matches = []
-
-    for game in games:
-
-        for book in game.get("bookmakers", []):
-
-            for market in book.get("markets", []):
-
-                for outcome in market.get("outcomes", []):
-
-                    if player_name.lower() in outcome.get("description", "").lower():
-
-                        matches.append({
-
-                            "book": book["title"],
-
-                            "odds": outcome["price"]
-
-                        })
-
-    if not matches:
-
-        return None
-
-    return sorted(matches, key=lambda x: x["odds"], reverse=True)[0]
-
-def run_sim(stats, sportsbook_odds):
-
-    base_hr_pa = max(stats["hr_pa"], 0.04)
-
-    hard_hit_boost = 1 + stats["hard_hit"] * 0.35
-
-    fly_ball_boost = 1 + stats["fly_ball"] * 0.25
-
-    adj_hr_pa = base_hr_pa * hard_hit_boost * fly_ball_boost
-
-    hr_prob = 1 - (1 - adj_hr_pa) ** 4
-
-    fair_odds = prob_to_american(hr_prob)
-
-    implied_prob = american_to_prob(sportsbook_odds)
-
-    edge = hr_prob - implied_prob
-
-    if edge >= 0.08:
+    if edge > 60:
 
         signal = "🔥 ELITE"
 
-    elif edge >= 0.04:
+    elif edge > 30:
 
         signal = "🔥 STRONG"
 
-    elif edge >= 0.015:
+    elif edge > 10:
 
         signal = "👍 VALUE"
 
@@ -174,42 +40,14 @@ def run_sim(stats, sportsbook_odds):
 
         signal = "❌ PASS"
 
-    return hr_prob, fair_odds, implied_prob, edge, signal
+    st.write(f"Player: {player_name}")
 
-if player_name and ODDS_API_KEY:
+    st.write(f"HR Probability: {round(hr_prob*100,2)}%")
 
-    player_id = get_mlb_player_id(player_name)
+    st.write(f"Fair Odds: {round(fair_odds)}")
 
-    if player_id:
+    st.write(f"Sportsbook Odds: +{sportsbook_odds}")
 
-        stats = get_recent_batter_stats(player_id)
+    st.write(f"Edge: {round(edge)}")
 
-        odds = get_hr_odds(player_name)
-
-        if stats and odds:
-
-            hr_prob, fair_odds, implied_prob, edge, signal = run_sim(stats, odds["odds"])
-
-            st.subheader(player_name.title())
-
-            st.write(f"HR Probability: {round(hr_prob*100,2)}%")
-
-            st.write(f"Fair Odds: {round(fair_odds)}")
-
-            st.write(f"Sportsbook Odds: {odds['odds']}")
-
-            st.write(f"Edge: {round(edge*100,2)}%")
-
-            st.write(f"Signal: {signal}")
-
-        else:
-
-            st.warning("Not enough data or odds found.")
-
-    else:
-
-        st.error("Player not found.")
-
-elif player_name:
-
-    st.error("Add your Odds API key 
+    st.write(f"Signal: {signal}")
