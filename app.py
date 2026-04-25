@@ -27,7 +27,6 @@ TOP_30 = [
 ]
 
 TEAM_HITTERS = {
-
     "NYY": ["Aaron Judge","Giancarlo Stanton","Anthony Volpe","Gleyber Torres"],
 
     "BOS": ["Rafael Devers","Triston Casas","Trevor Story","Jarren Duran"],
