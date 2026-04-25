@@ -168,7 +168,3 @@ if player_name:
 
     st.error("Statcast/player stats not found.")
 
-elif not odds:
-
-    st.error("HR odds not found. This usually means no HR prop is posted yet for this player.")
-t
